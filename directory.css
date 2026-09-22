@@ -132,23 +132,58 @@ details.faq summary { cursor: pointer; font-weight: bold; color: #002147; }
 details.faq p { margin: 8px 0 0; }
 .disclaimer { font-size: 0.85em; color: #4a5a63; }
 
-/* Insurance logos */
-.ins-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 14px;
-  max-width: 900px;
-  margin: 14px auto;
+/* Insurance logos -- transparent PNGs scrolling in a continuous marquee.
+   Two identical copies of the logo set sit side by side in one flex track
+   (the second copy is aria-hidden, decorative only); animating the track
+   exactly -50% loops seamlessly since that's precisely the width of one
+   copy. */
+.ins-marquee {
+  max-width: 100%;
+  overflow: hidden;
+  margin: 18px auto;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
 }
-.ins-grid figure {
+.ins-track {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  gap: 56px;
+  animation: ins-scroll 32s linear infinite;
+}
+.ins-track-dup {
+  display: contents;
+}
+.ins-marquee:hover .ins-track,
+.ins-marquee:focus-within .ins-track {
+  animation-play-state: paused;
+}
+.ins-track figure {
   margin: 0;
-  background: #fff;
-  border: 1px solid #d4e1f7;
-  border-radius: 10px;
-  padding: 10px;
+  flex: 0 0 auto;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 96px;
+  height: 72px;
 }
-.ins-grid img { max-width: 100%; max-height: 84px; height: auto; }
+.ins-track img {
+  max-width: 150px;
+  max-height: 64px;
+  width: auto;
+  height: auto;
+}
+@keyframes ins-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ins-track {
+    animation: none;
+    flex-wrap: wrap;
+    width: auto;
+    justify-content: center;
+  }
+  .ins-track-dup {
+    display: none;
+  }
+}
