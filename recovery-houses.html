@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recovery Houses in Cuyahoga County, Ohio | New Leaf Behavioral Health</title>
+    <meta name="description" content="Search recovery houses and sober living in Cleveland and Cuyahoga County, Ohio from the state's public registry. Filter by who they serve, MAT support, and more.">
+    <link rel="icon" href="favicon.png" type="image/png">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="directory.css">
+</head>
+<body>
+<div id="header"></div>
+
+<div class="full_width_section" id="RecoveryHouses">
+    <h1>Recovery Houses in Cuyahoga County</h1>
+    <p class="page-lead">A safe, substance-free place to live can make early recovery much easier. Search recovery houses across Cleveland and Cuyahoga County, then call the ones that fit to ask about openings.</p>
+
+    <div class="dir-note">
+        <strong>Call to confirm availability.</strong> Openings change daily, and this list does not show which houses have an empty bed right now. Every house sets its own rules, costs, and intake process, so ask about those when you call.
+    </div>
+
+    <div class="dir-filters">
+        <div class="dir-filter-row">
+            <div>
+                <label for="q">Search by name or city</label>
+                <input type="search" id="q" placeholder="For example: Parma, Oxford, women" autocomplete="off">
+            </div>
+            <div>
+                <label for="city">City</label>
+                <select id="city"><option value="">All cities</option></select>
+            </div>
+            <div>
+                <label for="serves">Who it serves</label>
+                <select id="serves">
+                    <option value="">Anyone</option>
+                    <option value="Men">Men</option>
+                    <option value="Women">Women</option>
+                    <option value="Women with Children">Women with children</option>
+                    <option value="Men with Children">Men with children</option>
+                    <option value="Families with Children">Families with children</option>
+                </select>
+            </div>
+            <div>
+                <label for="level">Type of house</label>
+                <select id="level">
+                    <option value="">Any type</option>
+                    <option value="Peer-Run">Peer-run</option>
+                    <option value="Managed">Managed</option>
+                    <option value="Supervised">Supervised</option>
+                </select>
+            </div>
+        </div>
+        <div class="dir-checks">
+            <label><input type="checkbox" id="mat"> Supports medication (MAT)</label>
+            <label><input type="checkbox" id="veterans"> Veterans</label>
+            <label><input type="checkbox" id="dual"> Mental health and substance use (dual diagnosis)</label>
+            <label><input type="checkbox" id="accessible"> Wheelchair accessible</label>
+        </div>
+        <p class="dir-hint"><strong>Peer-run:</strong> residents run the house together. <strong>Managed:</strong> a house manager oversees the home. <strong>Supervised:</strong> staff are on site with more structure. Houses that did not list who they serve are hidden when you pick a group above.</p>
+    </div>
+
+    <p class="dir-count" id="count" role="status" aria-live="polite">Loading recovery houses...</p>
+    <div class="dir-grid" id="list"></div>
+
+    <div class="dir-note" style="margin-top:22px;">
+        <strong>Where this list comes from.</strong> Houses come from the Ohio Department of Behavioral Health's public recovery housing registry (Cuyahoga County report dated September 17, 2026). New houses can take time to appear there, and details can be out of date. Being listed here is not an endorsement, and New Leaf does not accept payment for any listing. To report a correction or a missing house, email <a href="mailto:info@newleafohio.com">info@newleafohio.com</a>. You can also use the state's own <a href="https://rhsearch.mha.ohio.gov/" target="_blank" rel="noopener">recovery housing search</a>.
+    </div>
+
+    <div class="panel cta-panel">
+        <h2>Need more than a place to live?</h2>
+        <p>New Leaf offers partial hospitalization (PHP), intensive outpatient (IOP), counseling, case management, and peer support in Valley View.</p>
+        <div class="cta-row">
+            <a class="btn call" href="tel:216-770-8911">Call (216) 770-8911</a>
+            <a class="btn ghost" href="get-started.html">How to get started</a>
+        </div>
+    </div>
+</div>
+
+<div id="footer"></div>
+<script src="header_footer.js" defer></script>
+<script src="javascript/highlight.js" defer></script>
+<script src="javascript/mob_menu.js" defer></script>
+<script>
+(function () {
+    var houses = [];
+    var el = function (id) { return document.getElementById(id); };
+    var esc = function (s) {
+        return String(s).replace(/[&<>"']/g, function (c) {
+            return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+        });
+    };
+
+    function tagsFor(h) {
+        var t = '<span class="level" title="House type">' + esc(h.level) + '</span>';
+        if (h.mat) { t += '<span>Supports MAT</span>'; }
+        if (h.veterans) { t += '<span>Veterans</span>'; }
+        if (h.dual) { t += '<span>Dual diagnosis</span>'; }
+        if (h.significantOthers) { t += '<span>Significant others allowed</span>'; }
+        if (h.accessible) { t += '<span>Wheelchair accessible</span>'; }
+        return t;
+    }
+
+    function cardFor(h) {
+        var where = h.city + (h.zip ? ', OH ' + h.zip : ', OH');
+        var serves = h.serves.length ? 'Serves: ' + h.serves.join(', ') : 'Who it serves: not listed';
+        var html = '<div class="dir-card"><h3>' + esc(h.name) + '</h3>';
+        if (h.operator) { html += '<p class="dir-sub">Run by ' + esc(h.operator) + '</p>'; }
+        html += '<p class="dir-meta">' + esc(where) + ' &middot; ' + (h.beds ? esc(h.beds) + ' beds' : 'Beds not listed') + '</p>';
+        html += '<div class="dir-tags">' + tagsFor(h) + '</div>';
+        html += '<p class="dir-meta">' + esc(serves) + '</p>';
+        html += '<div class="dir-actions">';
+        if (h.tel && h.tel.length === 10) {
+            html += '<a class="btn call small" href="tel:' + esc(h.tel) + '">Call ' + esc(h.phone) + '</a>';
+        } else if (h.phone) {
+            html += '<span class="dir-meta">' + esc(h.phone) + '</span>';
+        }
+        if (h.website) {
+            html += '<a class="btn ghost small" href="' + esc(h.website) + '" target="_blank" rel="noopener">Website</a>';
+        }
+        return html + '</div></div>';
+    }
+
+    function matches(h) {
+        var q = el('q').value.trim().toLowerCase();
+        if (q) {
+            var hay = (h.name + ' ' + h.operator + ' ' + h.city + ' ' + h.zip + ' ' + h.serves.join(' ')).toLowerCase();
+            var words = q.split(/\s+/);
+            for (var i = 0; i < words.length; i++) {
+                if (hay.indexOf(words[i]) === -1) { return false; }
+            }
+        }
+        if (el('city').value && h.city !== el('city').value) { return false; }
+        if (el('serves').value && h.serves.indexOf(el('serves').value) === -1) { return false; }
+        if (el('level').value && h.level !== el('level').value) { return false; }
+        if (el('mat').checked && !h.mat) { return false; }
+        if (el('veterans').checked && !h.veterans) { return false; }
+        if (el('dual').checked && !h.dual) { return false; }
+        if (el('accessible').checked && !h.accessible) { return false; }
+        return true;
+    }
+
+    function render() {
+        var shown = houses.filter(matches);
+        el('list').innerHTML = shown.map(cardFor).join('');
+        el('count').textContent = shown.length === houses.length
+            ? houses.length + ' recovery houses'
+            : shown.length + ' of ' + houses.length + ' recovery houses match';
+        if (shown.length === 0) {
+            el('list').innerHTML = '<div class="panel">No houses match those filters. Try removing one, or call New Leaf at <a href="tel:216-770-8911">(216) 770-8911</a> and we will help you look.</div>';
+        }
+    }
+
+    fetch('data/recovery-houses.json')
+        .then(function (r) { if (!r.ok) { throw new Error('bad response'); } return r.json(); })
+        .then(function (data) {
+            houses = data;
+            var cities = {};
+            houses.forEach(function (h) { if (h.city) { cities[h.city] = true; } });
+            Object.keys(cities).sort().forEach(function (c) {
+                var o = document.createElement('option');
+                o.value = c; o.textContent = c;
+                el('city').appendChild(o);
+            });
+            ['q', 'city', 'serves', 'level', 'mat', 'veterans', 'dual', 'accessible'].forEach(function (id) {
+                el(id).addEventListener(id === 'q' ? 'input' : 'change', render);
+            });
+            render();
+        })
+        .catch(function () {
+            el('count').textContent = 'The list could not be loaded right now. Please call (216) 770-8911 and we will help you find a recovery house.';
+        });
+})();
+</script>
+</body>
+</html>

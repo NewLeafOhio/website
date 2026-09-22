@@ -1,0 +1,26 @@
+
+
+
+function openMaps(event) {
+    // Prevent default action
+    event.preventDefault();
+    
+    // Define the address
+    const address = "1600 Amphitheatre Parkway, Mountain View, CA";
+
+    // Get the current user agent
+    const userAgent = navigator.userAgent.toLowerCase();
+
+    // Check if the device is iOS or Android
+    if (userAgent.includes('iphone') || userAgent.includes('ipad')) {
+        // Open Apple Maps for iOS
+        window.location.href = `http://maps.apple.com/?daddr=${encodeURIComponent(address)}`;
+    } else if (userAgent.includes('android')) {
+        // Open Google Maps for Android
+        window.location.href = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(address)}`;
+    } else {
+        // Fallback to Google Maps in the browser
+        window.open(`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(address)}`, '_blank');
+    }
+}
+

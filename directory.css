@@ -1,0 +1,154 @@
+/* Styles for the resource pages (recovery houses, find help, get started).
+   Uses the site's existing palette: light blue #e6f1f8, navy #002147, green #006400. */
+
+.page-lead { font-size: 1.1em; max-width: 60em; }
+
+.dir-note {
+  background: #fff;
+  border-left: 5px solid #002147;
+  border-radius: 6px;
+  padding: 12px 16px;
+  margin: 0 0 18px;
+  font-size: 0.95em;
+  color: #2f3e46;
+}
+.dir-note.warn { border-left-color: #b45309; background: #fff8ec; }
+
+.dir-filters {
+  background: #fff;
+  border: 1px solid #d4e1f7;
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin-bottom: 14px;
+}
+.dir-filter-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+}
+.dir-filters label { display: block; font-size: 0.85em; color: #2f3e46; font-weight: bold; }
+.dir-filters input[type="search"],
+.dir-filters select {
+  width: 100%;
+  margin-top: 4px;
+  padding: 9px 10px;
+  border: 1px solid #b9c9d9;
+  border-radius: 6px;
+  font-size: 1em;
+  box-sizing: border-box;
+  background: #fff;
+}
+.dir-checks { display: flex; flex-wrap: wrap; gap: 8px 20px; margin-top: 12px; }
+.dir-checks label { font-weight: normal; font-size: 0.95em; display: flex; align-items: center; gap: 6px; }
+.dir-hint { font-size: 0.85em; color: #4a5a63; margin: 8px 0 0; }
+
+.dir-count { font-weight: bold; color: #002147; margin: 10px 0; }
+
+.dir-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 16px;
+}
+.dir-card {
+  background: #fff;
+  border: 1px solid #d4e1f7;
+  border-radius: 10px;
+  padding: 14px 16px 16px;
+  display: flex;
+  flex-direction: column;
+}
+.full_width_section .dir-card h3 { margin: 0 0 2px; font-size: 1.1em; color: #002147; }
+.dir-sub { font-size: 0.85em; color: #4a5a63; margin: 0 0 6px; }
+.dir-meta { font-size: 0.92em; color: #2f3e46; margin: 6px 0 0; }
+.dir-tags { margin: 8px 0 6px; }
+.dir-tags span {
+  display: inline-block;
+  font-size: 0.8em;
+  background: #e6f1f8;
+  color: #002147;
+  border-radius: 12px;
+  padding: 2px 10px;
+  margin: 2px 4px 2px 0;
+}
+.dir-tags span.level { background: #002147; color: #fff; }
+.dir-actions { margin-top: auto; padding-top: 10px; display: flex; flex-wrap: wrap; gap: 8px; }
+
+.full_width_section a.btn,
+.full_width_section a.btn:hover {
+  display: inline-block;
+  background: #002147;
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-weight: bold;
+  text-decoration: none;
+}
+.full_width_section a.btn.call, .full_width_section a.btn.call:hover { background: #006400; }
+.full_width_section a.btn.ghost, .full_width_section a.btn.ghost:hover {
+  background: #fff;
+  color: #002147;
+  border: 2px solid #002147;
+  padding: 8px 16px;
+}
+.full_width_section a.btn.small, .full_width_section a.btn.small:hover { padding: 7px 14px; font-size: 0.9em; }
+
+.panel {
+  background: #fff;
+  border: 1px solid #d4e1f7;
+  border-radius: 10px;
+  padding: 16px 20px;
+  margin: 0 0 18px;
+}
+.panel h2 { margin-top: 0; }
+.cta-panel { background: #fff; border: 2px solid #006400; text-align: center; }
+.cta-panel .cta-phone { font-size: 1.8em; font-weight: bold; margin: 6px 0 12px; }
+.cta-row { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+
+.steps { counter-reset: step; list-style: none; padding: 0; margin: 0; }
+.steps li {
+  counter-increment: step;
+  position: relative;
+  padding: 0 0 14px 48px;
+  min-height: 34px;
+}
+.steps li::before {
+  content: counter(step);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #002147;
+  color: #fff;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; }
+details.faq { border-top: 1px solid #d4e1f7; padding: 10px 0; }
+details.faq summary { cursor: pointer; font-weight: bold; color: #002147; }
+details.faq p { margin: 8px 0 0; }
+.disclaimer { font-size: 0.85em; color: #4a5a63; }
+
+/* Insurance logos */
+.ins-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 14px;
+  max-width: 900px;
+  margin: 14px auto;
+}
+.ins-grid figure {
+  margin: 0;
+  background: #fff;
+  border: 1px solid #d4e1f7;
+  border-radius: 10px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 96px;
+}
+.ins-grid img { max-width: 100%; max-height: 84px; height: auto; }
