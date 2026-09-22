@@ -147,7 +147,12 @@ header {
   .nav a {
     text-decoration: none;
     color: white;
-    padding: 0.625em 1.25em;
+    padding: clamp(0.4em, 1.4vw, 0.625em) clamp(0.5em, 1.8vw, 1.25em);
+    font-size: clamp(0.8rem, 0.7rem + 0.6vw, 1rem);
+    white-space: nowrap;
+  }
+  .nav {
+    flex-wrap: nowrap;
   }
   .menu-toggle {
     display: none;
@@ -335,7 +340,7 @@ footer {
 
   
 		  /* Add new CSS for mobile view */
-        @media (max-width: 910px) 
+        @media (max-width: 1180px)
 		
 		{
             .nav {
