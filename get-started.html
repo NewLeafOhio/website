@@ -26,16 +26,18 @@
         <p class="disclaimer" style="margin:12px 0 0;">Email is not a secure way to share health information. Please leave your name and number, and we will talk when we call.</p>
     </div>
 
-    <div class="panel">
-        <h2>Speed up your visit</h2>
-        <p>Want to save some time? You can fill out some information online before you come in or call &mdash; it's optional, and it doesn't replace talking with us.</p>
-        <div class="cta-row">
-            <a class="btn ghost" href="http://44.212.195.197:8081/custom/nlbh/kiosk/request_intake.php">Start Online</a>
-            <!-- TESTING ONLY: points at the dev/test EMR server so this can be tried before production has custom/nlbh/ deployed.
-                 Swap back to https://staff.newleafohio.com/custom/nlbh/kiosk/request_intake.php once that deployment happens. -->
-        </div>
-        <p class="disclaimer" style="margin:12px 0 0;">We'll email you a secure link to finish whenever is convenient for you, from your own phone or computer.</p>
-    </div>
+    <!--
+        "Speed up your visit" online-intake panel is intentionally NOT in
+        this static HTML -- see the script at the bottom of this page. It's
+        built and inserted by JavaScript only after a key-sequence "cheat
+        code" is entered, so a search engine (which reads this file as-is
+        and doesn't type key sequences) never sees or indexes this text,
+        and a normal visitor scrolling the page never sees the panel either.
+        TESTING ONLY right now: it points at the dev/test EMR server. Swap
+        it to https://staff.newleafohio.com/custom/nlbh/kiosk/request_intake.php
+        once custom/nlbh/ is deployed to production.
+    -->
+    <div id="nlbh-hidden-intake-slot"></div>
 
     <div class="dir-note warn">
         <strong>If you are in crisis or in danger right now,</strong> do not wait. Call <a href="tel:911">911</a>, or call or text <a href="tel:988">988</a> (Suicide &amp; Crisis Lifeline, 24/7). For substance use help any time, call the SAMHSA helpline at <a href="tel:1-800-662-4357">1-800-662-HELP (4357)</a>.
@@ -136,5 +138,6 @@
 <script src="header_footer.js" defer></script>
 <script src="javascript/highlight.js" defer></script>
 <script src="javascript/mob_menu.js" defer></script>
+<script src="javascript/hidden-intake-panel.js" defer></script>
 </body>
 </html>
