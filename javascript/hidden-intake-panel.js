@@ -42,10 +42,7 @@
                 '<h2>Speed up your visit</h2>' +
                 '<p>Want to save some time? You can fill out some information online before you come in or call &mdash; it\'s optional, and it doesn\'t replace talking with us.</p>' +
                 '<div class="cta-row">' +
-                    // TESTING ONLY: dev/test EMR server. Swap to
-                    // https://staff.newleafohio.com/custom/nlbh/kiosk/request_intake.php
-                    // once custom/nlbh/ is deployed to production.
-                    '<a class="btn ghost" href="http://44.212.195.197:8081/custom/nlbh/kiosk/request_intake.php">Start Online</a>' +
+                    '<a class="btn ghost" href="https://staff.newleafohio.com/custom/nlbh/kiosk/request_intake.php">Start Online</a>' +
                 '</div>' +
                 '<p class="disclaimer" style="margin:12px 0 0;">We\'ll email you a secure link to finish whenever is convenient for you, from your own phone or computer.</p>' +
             '</div>';
